@@ -1,0 +1,79 @@
+package az.mamedali.rawg.koin
+
+import androidx.lifecycle.SavedStateHandle
+import az.mamedali.rawg.game_detail.data.GameDetailRepositoryImpl
+import az.mamedali.rawg.game_detail.domain.GameDetailRepository
+import az.mamedali.rawg.game_detail.domain.GetGameDetailUseCase
+import az.mamedali.rawg.game_detail.ui.GameDetailViewModel
+import az.mamedali.rawg.home.data.HomeRepositoryImpl
+import az.mamedali.rawg.home.domain.GetAllGamesUseCase
+import az.mamedali.rawg.home.domain.GetTrendingGamesUseCase
+import az.mamedali.rawg.home.domain.HomeRepository
+import az.mamedali.rawg.home.ui.HomeViewModel
+import az.mamedali.rawg.search.data.SearchRepositoryImpl
+import az.mamedali.rawg.search.domain.GetGamesBySearchQueryUseCase
+import az.mamedali.rawg.search.domain.SearchRepository
+import az.mamedali.rawg.search.ui.SearchViewModel
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.http.URLProtocol
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNamingStrategy
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.module
+
+@OptIn(ExperimentalSerializationApi::class)
+val appModules = module {
+    single {
+        HttpClient(OkHttp.create()) {
+            install(DefaultRequest) {
+                url {
+                    protocol = URLProtocol.HTTPS
+                    host = "api.rawg.io"
+                    parameters.append("key", "193a5e92c52a498488eb4f099d201b99")
+                }
+            }
+            install(Logging) {
+                level = LogLevel.ALL
+            }
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                        namingStrategy = JsonNamingStrategy.SnakeCase
+                    }
+                )
+            }
+        }
+    }
+    singleOf(::HomeRepositoryImpl) {
+        bind<HomeRepository>()
+    }
+    singleOf(::SearchRepositoryImpl) {
+        bind<SearchRepository>()
+    }
+    singleOf(::GameDetailRepositoryImpl) {
+        bind<GameDetailRepository>()
+    }
+    singleOf(::GetTrendingGamesUseCase)
+    singleOf(::GetAllGamesUseCase)
+    singleOf(::GetGamesBySearchQueryUseCase)
+    singleOf(::GetGameDetailUseCase)
+    viewModelOf(::HomeViewModel)
+    viewModelOf(::SearchViewModel)
+    viewModel { (savedStateHandle: SavedStateHandle) ->
+        GameDetailViewModel(
+            savedStateHandle = savedStateHandle,
+            getGameDetailUseCase = get()
+        )
+    }
+}
