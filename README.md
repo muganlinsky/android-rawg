@@ -59,6 +59,16 @@ This project uses the **RAWG Video Games Database API**.
 - Docs: [https://api.rawg.io/docs/](https://api.rawg.io/docs/)
 - Portal: [https://rawg.io/apidocs](https://rawg.io/apidocs)
 
+## API Key Setup
+
+To run this project, you need your own RAWG API key. Add your API key to the project configuration through `local.properties`.
+
+Example:
+```kotlin
+RAWG_API_KEY=your_api_key
+```
+
+
 ## Future Improvements
 
 - Game details screen

@@ -14,6 +14,7 @@ import az.mamedali.rawg.search.data.SearchRepositoryImpl
 import az.mamedali.rawg.search.domain.GetGamesBySearchQueryUseCase
 import az.mamedali.rawg.search.domain.SearchRepository
 import az.mamedali.rawg.search.ui.SearchViewModel
+import az.mamedali.rawg.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.DefaultRequest
@@ -39,7 +40,7 @@ val appModules = module {
                 url {
                     protocol = URLProtocol.HTTPS
                     host = "api.rawg.io"
-                    parameters.append("key", "193a5e92c52a498488eb4f099d201b99")
+                    parameters.append("key", BuildConfig.RAWG_API_KEY)
                 }
             }
             install(Logging) {
