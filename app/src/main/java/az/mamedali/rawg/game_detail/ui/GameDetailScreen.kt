@@ -15,12 +15,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,13 +27,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import az.mamedali.rawg.core.ui.TextBodyMedium
-import az.mamedali.rawg.core.ui.TextLabelMedium
-import az.mamedali.rawg.core.ui.TextTitleLarge
-import az.mamedali.rawg.core.ui.TextTitleMedium
+import az.mamedali.rawg.R
+import az.mamedali.rawg.core.ui.components.TextBodyMedium
+import az.mamedali.rawg.core.ui.components.TextLabelMedium
+import az.mamedali.rawg.core.ui.components.TextTitleLarge
+import az.mamedali.rawg.core.ui.components.TextTitleMedium
 import az.mamedali.rawg.game_detail.domain.GameDetail
+import az.mamedali.rawg.game_detail.ui.components.ActionIconButton
 import coil3.compose.AsyncImage
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -70,27 +72,25 @@ fun GameDetailUi(
                 )
             }
             is GameDetailUiState.Error -> {
-                TextBodyMedium(
-                    modifier = Modifier.align(Alignment.Center),
-                    text = "Failed to load"
-                )
+
             }
         }
-        IconButton(
+        ActionIconButton(
             modifier = Modifier
                 .align(Alignment.TopStart)
                 .padding(8.dp),
-            colors = IconButtonDefaults.iconButtonColors(
-                containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
-                contentColor = MaterialTheme.colorScheme.onSurface
-            ),
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             onClick = onBackClick
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = null
-            )
-        }
+        )
+        ActionIconButton(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(8.dp),
+            imageVector = Icons.Default.FavoriteBorder,
+            onClick = {
+
+            }
+        )
     }
 }
 
@@ -129,12 +129,13 @@ fun GameDetailUiSuccess(
             )
             if (gameDetail.platforms.isNotEmpty()) {
                 PlatformSection(
+                    modifier = Modifier.padding(vertical = 8.dp),
                     platforms = gameDetail.platforms
                 )
             }
             if (!gameDetail.description.isNullOrBlank()) {
                 TextTitleMedium(
-                    text = "Description"
+                    text = stringResource(R.string.game_detail_description)
                 )
                 TextBodyMedium(
                     text = gameDetail.description
@@ -176,13 +177,12 @@ fun RatingRow(game: GameDetail) {
                 },
                 label = {
                     TextLabelMedium(
-                        text = "Metacritic: $it"
+                        text = stringResource(R.string.game_detail_metacritic, it)
                     )
                 }
             )
         }
     }
-
 }
 
 @Composable
@@ -190,26 +190,30 @@ fun MetadataRow(game: GameDetail) {
     Column {
         game.released?.let {
             TextLabelMedium(
-                text = "Released: $it"
+                text = stringResource(R.string.game_detail_released, it)
             )
         }
         if (game.playtime > 0) {
             TextLabelMedium(
-                text = "Playtime: ~${game.playtime}h"
+                text = stringResource(R.string.game_detail_metacritic, game.playtime.toString())
             )
         }
         game.esrb?.let {
             TextLabelMedium(
-                text = "Age rating: $it"
+                text = stringResource(R.string.game_detail_age_rating, it)
             )
         }
     }
 }
 
 @Composable
-fun PlatformSection(platforms: List<String>) {
+fun PlatformSection(
+    modifier: Modifier = Modifier,
+    platforms: List<String>
+) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         TextTitleMedium(
             text = "Platforms"

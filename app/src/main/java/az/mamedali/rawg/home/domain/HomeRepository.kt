@@ -1,8 +1,8 @@
 package az.mamedali.rawg.home.domain
 
-import az.mamedali.rawg.core.domain.NetworkError
-import az.mamedali.rawg.core.domain.Result
-import az.mamedali.rawg.home.data.GameResponse
+import az.mamedali.rawg.core.domain.network.NetworkError
+import az.mamedali.rawg.core.domain.network.Result
+import az.mamedali.rawg.core.data.GameResponse
 
 interface HomeRepository {
     suspend fun fetchTrendingGames(): Result<GameResponse, NetworkError>

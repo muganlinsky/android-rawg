@@ -1,4 +1,4 @@
-package az.mamedali.rawg.home.domain
+package az.mamedali.rawg.core.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

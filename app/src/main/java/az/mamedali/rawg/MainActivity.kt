@@ -24,10 +24,11 @@ import az.mamedali.rawg.core.ui.RawgTheme
 import az.mamedali.rawg.home.ui.HomeScreen
 import androidx.navigation.compose.composable
 import az.mamedali.rawg.core.ui.Route
-import az.mamedali.rawg.core.ui.BottomNavItem
-import az.mamedali.rawg.core.ui.BottomNavigationBar
+import az.mamedali.rawg.core.ui.components.BottomNavItem
+import az.mamedali.rawg.core.ui.components.BottomNavigationBar
 import az.mamedali.rawg.favorites.ui.FavoritesScreen
 import az.mamedali.rawg.game_detail.ui.GameDetailScreen
+import az.mamedali.rawg.games_by_genre.ui.GamesByGenreScreen
 import az.mamedali.rawg.search.ui.SearchScreen
 
 class MainActivity : ComponentActivity() {
@@ -80,7 +81,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<Route.Search> {
-                            SearchScreen()
+                            SearchScreen(
+                                onGenreClick = { genreId ->
+                                    navController.navigate(Route.GamesByGenre(genreId))
+                                }
+                            )
                         }
                         composable<Route.Favorites> {
                             FavoritesScreen()
@@ -89,6 +94,16 @@ class MainActivity : ComponentActivity() {
                             GameDetailScreen(
                                 onBackClick = {
                                     navController.popBackStack()
+                                }
+                            )
+                        }
+                        composable<Route.GamesByGenre> {
+                            GamesByGenreScreen(
+                                onBackClick = {
+                                    navController.popBackStack()
+                                },
+                                onGameClick = { gameId ->
+                                    navController.navigate(Route.GameDetail(gameId))
                                 }
                             )
                         }

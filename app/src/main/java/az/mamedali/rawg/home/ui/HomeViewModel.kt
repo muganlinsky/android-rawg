@@ -2,9 +2,9 @@ package az.mamedali.rawg.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.mamedali.rawg.core.domain.onError
-import az.mamedali.rawg.core.domain.onSuccess
-import az.mamedali.rawg.home.domain.Game
+import az.mamedali.rawg.core.domain.network.onError
+import az.mamedali.rawg.core.domain.network.onSuccess
+import az.mamedali.rawg.core.domain.Game
 import az.mamedali.rawg.home.domain.GetAllGamesUseCase
 import az.mamedali.rawg.home.domain.GetTrendingGamesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Genre(
+    val id: Int,
     val name: String,
     val slug: String,
     val gamesCount: Int,

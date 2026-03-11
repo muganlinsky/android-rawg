@@ -2,7 +2,7 @@ package az.mamedali.rawg.search.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.mamedali.rawg.core.domain.onSuccess
+import az.mamedali.rawg.core.domain.network.onSuccess
 import az.mamedali.rawg.search.data.SearchRepositoryImpl
 import az.mamedali.rawg.search.domain.Genre
 import az.mamedali.rawg.search.domain.GetGamesBySearchQueryUseCase

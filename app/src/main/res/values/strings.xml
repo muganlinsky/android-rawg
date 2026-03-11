@@ -13,4 +13,10 @@
     <string name="search_title">Search</string>
 
     <string name="favorites_title">Favorites</string>
+
+    <string name="game_detail_description">Description</string>
+    <string name="game_detail_released">Released: %1$s</string>
+    <string name="game_detail_playtime">Playtime: ~%1$sh</string>
+    <string name="game_detail_metacritic">Metacritic: %1$s</string>
+    <string name="game_detail_age_rating">Age rating: %1$s</string>
 </resources>

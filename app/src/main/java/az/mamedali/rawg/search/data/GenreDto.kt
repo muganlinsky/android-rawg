@@ -18,6 +18,7 @@ data class GenreDto(
 ) {
     fun toGenre(): Genre {
         return Genre(
+            id = id,
             name = name,
             imageBackground = imageBackground,
             slug = slug,

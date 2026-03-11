@@ -15,4 +15,7 @@ sealed class Route {
 
     @Serializable
     data class GameDetail(val gameId: Int)
+
+    @Serializable
+    data class GamesByGenre(val genreId: Int)
 }

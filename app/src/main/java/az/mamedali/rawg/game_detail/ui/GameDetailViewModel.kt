@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import az.mamedali.rawg.core.domain.onError
-import az.mamedali.rawg.core.domain.onSuccess
+import az.mamedali.rawg.core.domain.network.onError
+import az.mamedali.rawg.core.domain.network.onSuccess
 import az.mamedali.rawg.core.ui.Route
 import az.mamedali.rawg.game_detail.domain.GameDetail
 import az.mamedali.rawg.game_detail.domain.GetGameDetailUseCase

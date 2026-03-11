@@ -1,7 +1,8 @@
 package az.mamedali.rawg.home.data
 
-import az.mamedali.rawg.core.domain.NetworkError
-import az.mamedali.rawg.core.domain.Result
+import az.mamedali.rawg.core.data.GameResponse
+import az.mamedali.rawg.core.domain.network.NetworkError
+import az.mamedali.rawg.core.domain.network.Result
 import az.mamedali.rawg.core.data.safeCall
 import az.mamedali.rawg.home.domain.HomeRepository
 import io.ktor.client.HttpClient

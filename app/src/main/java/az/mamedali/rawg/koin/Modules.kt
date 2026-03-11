@@ -15,6 +15,10 @@ import az.mamedali.rawg.search.domain.GetGamesBySearchQueryUseCase
 import az.mamedali.rawg.search.domain.SearchRepository
 import az.mamedali.rawg.search.ui.SearchViewModel
 import az.mamedali.rawg.BuildConfig
+import az.mamedali.rawg.games_by_genre.data.GamesByGenreRepositoryImpl
+import az.mamedali.rawg.games_by_genre.domain.GamesByGenreRepository
+import az.mamedali.rawg.games_by_genre.domain.GetGamesByGenreUseCase
+import az.mamedali.rawg.games_by_genre.ui.GamesByGenreViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.DefaultRequest
@@ -56,6 +60,7 @@ val appModules = module {
             }
         }
     }
+
     singleOf(::HomeRepositoryImpl) {
         bind<HomeRepository>()
     }
@@ -65,16 +70,28 @@ val appModules = module {
     singleOf(::GameDetailRepositoryImpl) {
         bind<GameDetailRepository>()
     }
+    singleOf(::GamesByGenreRepositoryImpl) {
+        bind<GamesByGenreRepository>()
+    }
+
     singleOf(::GetTrendingGamesUseCase)
     singleOf(::GetAllGamesUseCase)
     singleOf(::GetGamesBySearchQueryUseCase)
     singleOf(::GetGameDetailUseCase)
+    singleOf(::GetGamesByGenreUseCase)
+
     viewModelOf(::HomeViewModel)
     viewModelOf(::SearchViewModel)
     viewModel { (savedStateHandle: SavedStateHandle) ->
         GameDetailViewModel(
             savedStateHandle = savedStateHandle,
             getGameDetailUseCase = get()
+        )
+    }
+    viewModel { (savedStateHandle: SavedStateHandle) ->
+        GamesByGenreViewModel(
+            savedStateHandle = savedStateHandle,
+            getGamesByGenreUseCase = get()
         )
     }
 }

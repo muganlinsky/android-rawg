@@ -1,7 +1,8 @@
 package az.mamedali.rawg.home.domain
 
-import az.mamedali.rawg.core.domain.NetworkError
-import az.mamedali.rawg.core.domain.Result
+import az.mamedali.rawg.core.domain.Game
+import az.mamedali.rawg.core.domain.network.NetworkError
+import az.mamedali.rawg.core.domain.network.Result
 
 class GetAllGamesUseCase(
     private val repository: HomeRepository

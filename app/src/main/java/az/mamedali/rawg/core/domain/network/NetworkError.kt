@@ -1,4 +1,4 @@
-package az.mamedali.rawg.core.domain
+package az.mamedali.rawg.core.domain.network
 
 enum class NetworkError : Error {
     REQUEST_TIMEOUT,

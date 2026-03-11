@@ -1,4 +1,4 @@
-package az.mamedali.rawg.core.ui
+package az.mamedali.rawg.core.ui.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -11,6 +11,7 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import az.mamedali.rawg.core.ui.Route
 import kotlin.collections.forEach
 
 @Composable

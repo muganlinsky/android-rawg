@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import az.mamedali.rawg.R
-import az.mamedali.rawg.core.ui.TextHeadlineSmall
+import az.mamedali.rawg.core.ui.components.TextHeadlineSmall
 
 @Composable
 fun FavoritesScreen() {

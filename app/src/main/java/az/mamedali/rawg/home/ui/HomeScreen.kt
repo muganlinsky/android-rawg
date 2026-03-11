@@ -27,8 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import az.mamedali.rawg.R
-import az.mamedali.rawg.core.ui.TextHeadlineSmall
-import az.mamedali.rawg.core.ui.TextTitleMedium
+import az.mamedali.rawg.core.ui.components.TextHeadlineSmall
+import az.mamedali.rawg.core.ui.components.TextTitleMedium
 import az.mamedali.rawg.home.ui.components.GameCard
 import az.mamedali.rawg.home.ui.components.GameCardError
 import az.mamedali.rawg.home.ui.components.GameCardLoading

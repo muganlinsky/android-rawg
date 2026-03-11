@@ -1,7 +1,7 @@
 package az.mamedali.rawg.search.data
 
-import az.mamedali.rawg.core.domain.NetworkError
-import az.mamedali.rawg.core.domain.Result
+import az.mamedali.rawg.core.domain.network.NetworkError
+import az.mamedali.rawg.core.domain.network.Result
 import az.mamedali.rawg.core.data.safeCall
 import az.mamedali.rawg.search.domain.SearchRepository
 import io.ktor.client.HttpClient

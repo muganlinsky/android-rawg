@@ -1,6 +1,6 @@
-package az.mamedali.rawg.home.data
+package az.mamedali.rawg.core.data
 
-import az.mamedali.rawg.home.domain.Game
+import az.mamedali.rawg.core.domain.Game
 import kotlinx.serialization.Serializable
 
 @Serializable

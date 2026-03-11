@@ -11,14 +11,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import az.mamedali.rawg.core.ui.TextTitleMedium
+import az.mamedali.rawg.core.ui.components.TextTitleMedium
 import az.mamedali.rawg.search.domain.Genre
 import coil3.compose.AsyncImage
 
 @Composable
 fun GenreBox(
     modifier: Modifier = Modifier,
-    genre: Genre
+    genre: Genre,
+    onClick: (Int) -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -26,7 +27,7 @@ fun GenreBox(
             .fillMaxWidth()
             .height(100.dp)
             .clickable {
-
+                onClick(genre.id)
             },
         contentAlignment = Alignment.Center
     ) {
@@ -47,10 +48,12 @@ fun GenreBox(
 fun GenreBoxPreview() {
     GenreBox(
         genre = Genre(
+            id = 1,
             name = "Action",
             slug = "",
             imageBackground = "https://images.unsplash.com/photo-168",
             gamesCount = 10
-        )
+        ),
+        onClick = {}
     )
 }
