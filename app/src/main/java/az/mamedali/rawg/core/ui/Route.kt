@@ -19,3 +19,13 @@ sealed class Route {
     @Serializable
     data class GamesByGenre(val genreId: Int)
 }
+
+fun String?.shouldShowBottomBar(): Boolean {
+    return when (this) {
+        Route.Home::class.qualifiedName,
+        Route.Search::class.qualifiedName,
+        Route.Favorites::class.qualifiedName -> true
+
+        else -> false
+    }
+}

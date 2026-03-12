@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -16,6 +19,7 @@ import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
@@ -23,9 +27,11 @@ import androidx.navigation.compose.rememberNavController
 import az.mamedali.rawg.core.ui.RawgTheme
 import az.mamedali.rawg.home.ui.HomeScreen
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import az.mamedali.rawg.core.ui.Route
 import az.mamedali.rawg.core.ui.components.BottomNavItem
 import az.mamedali.rawg.core.ui.components.BottomNavigationBar
+import az.mamedali.rawg.core.ui.shouldShowBottomBar
 import az.mamedali.rawg.favorites.ui.FavoritesScreen
 import az.mamedali.rawg.game_detail.ui.GameDetailScreen
 import az.mamedali.rawg.games_by_genre.ui.GamesByGenreScreen
@@ -38,32 +44,40 @@ class MainActivity : ComponentActivity() {
         setContent {
             RawgTheme {
                 val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-                        BottomNavigationBar(
-                            items = listOf(
-                                BottomNavItem(
-                                    name = stringResource(R.string.destination_home),
-                                    route = Route.Home,
-                                    icon = Icons.Outlined.Home,
-                                    selectedIcon = Icons.Filled.Home
+                        AnimatedVisibility(
+                            visible = currentRoute?.shouldShowBottomBar() ?: false,
+                            enter = fadeIn(),
+                            exit = fadeOut()
+                        ) {
+                            BottomNavigationBar(
+                                items = listOf(
+                                    BottomNavItem(
+                                        name = stringResource(R.string.destination_home),
+                                        route = Route.Home,
+                                        icon = Icons.Outlined.Home,
+                                        selectedIcon = Icons.Filled.Home
+                                    ),
+                                    BottomNavItem(
+                                        name = stringResource(R.string.destination_search),
+                                        route = Route.Search,
+                                        icon = Icons.Outlined.Search,
+                                        selectedIcon = Icons.Filled.Search
+                                    ),
+                                    BottomNavItem(
+                                        name = stringResource(R.string.destination_favorites),
+                                        route = Route.Favorites,
+                                        icon = Icons.Outlined.FavoriteBorder,
+                                        selectedIcon = Icons.Filled.Favorite
+                                    )
                                 ),
-                                BottomNavItem(
-                                    name = stringResource(R.string.destination_search),
-                                    route = Route.Search,
-                                    icon = Icons.Outlined.Search,
-                                    selectedIcon = Icons.Filled.Search
-                                ),
-                                BottomNavItem(
-                                    name = stringResource(R.string.destination_favorites),
-                                    route = Route.Favorites,
-                                    icon = Icons.Outlined.FavoriteBorder,
-                                    selectedIcon = Icons.Filled.Favorite
-                                )
-                            ),
-                            navController = navController
-                        )
+                                navController = navController
+                            )
+                        }
                     }
                 ) { innerPadding ->
                     NavHost(

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,11 +42,11 @@ fun GameRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp)
+                .height(100.dp)
         ) {
             AsyncImage(
                 modifier = Modifier
-                    .width(120.dp)
+                    .width(100.dp)
                     .fillMaxHeight(),
                 model = game.imageUrl,
                 contentDescription = null,
@@ -54,7 +55,7 @@ fun GameRow(
 
             Column(
                 modifier = Modifier
-                    .fillMaxHeight()
+                    .fillMaxSize()
                     .padding(12.dp)
             ) {
                 TextTitleSmall(

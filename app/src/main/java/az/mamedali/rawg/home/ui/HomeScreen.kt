@@ -57,10 +57,7 @@ fun HomeUi(
     onGameClick: (Int) -> Unit
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
         CenterAlignedTopAppBar(
             title = {
@@ -69,20 +66,27 @@ fun HomeUi(
                 )
             }
         )
-        GameSection(
-            text = stringResource(R.string.home_top_trending_title)
-        )
-        GameLazyRow(
-            gamesUiState = trendingGamesUiState,
-            onGameClick = onGameClick
-        )
-        GameSection(
-            text = stringResource(R.string.home_all_games_title)
-        )
-        GameLazyRow(
-            gamesUiState = allGamesUiState,
-            onGameClick = onGameClick
-        )
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            GameSection(
+                text = stringResource(R.string.home_top_trending_title)
+            )
+            GameLazyRow(
+                gamesUiState = trendingGamesUiState,
+                onGameClick = onGameClick
+            )
+            GameSection(
+                text = stringResource(R.string.home_all_games_title)
+            )
+            GameLazyRow(
+                gamesUiState = allGamesUiState,
+                onGameClick = onGameClick
+            )
+        }
     }
 }
 
