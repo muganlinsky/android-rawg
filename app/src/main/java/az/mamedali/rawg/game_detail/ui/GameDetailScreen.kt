@@ -195,7 +195,7 @@ fun MetadataRow(game: GameDetail) {
         }
         if (game.playtime > 0) {
             TextLabelMedium(
-                text = stringResource(R.string.game_detail_metacritic, game.playtime.toString())
+                text = stringResource(R.string.game_detail_playtime, game.playtime.toString())
             )
         }
         game.esrb?.let {

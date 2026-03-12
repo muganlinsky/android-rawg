@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GameResponse(
+    val next: String?,
     val results: List<GameDto>
 )
 

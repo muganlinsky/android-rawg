@@ -17,7 +17,7 @@ sealed class Route {
     data class GameDetail(val gameId: Int)
 
     @Serializable
-    data class GamesByGenre(val genreId: Int)
+    data class GamesByGenre(val genreId: Int, val genreName: String)
 }
 
 fun String?.shouldShowBottomBar(): Boolean {

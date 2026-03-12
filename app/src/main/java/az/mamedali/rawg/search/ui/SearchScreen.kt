@@ -20,7 +20,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SearchScreen(
-    onGenreClick: (Int) -> Unit,
+    onGenreClick: (Int, String) -> Unit,
     viewModel: SearchViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -35,7 +35,7 @@ fun SearchScreen(
 fun SearchUi(
     modifier: Modifier = Modifier,
     genres: List<Genre> = emptyList(),
-    onGenreClick: (Int) -> Unit,
+    onGenreClick: (Int, String) -> Unit,
 ) {
     Column(
         modifier = modifier.fillMaxSize()

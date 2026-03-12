@@ -17,7 +17,6 @@ import az.mamedali.rawg.search.ui.SearchViewModel
 import az.mamedali.rawg.BuildConfig
 import az.mamedali.rawg.games_by_genre.data.GamesByGenreRepositoryImpl
 import az.mamedali.rawg.games_by_genre.domain.GamesByGenreRepository
-import az.mamedali.rawg.games_by_genre.domain.GetGamesByGenreUseCase
 import az.mamedali.rawg.games_by_genre.ui.GamesByGenreViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
@@ -78,7 +77,6 @@ val appModules = module {
     singleOf(::GetAllGamesUseCase)
     singleOf(::GetGamesBySearchQueryUseCase)
     singleOf(::GetGameDetailUseCase)
-    singleOf(::GetGamesByGenreUseCase)
 
     viewModelOf(::HomeViewModel)
     viewModelOf(::SearchViewModel)
@@ -91,7 +89,7 @@ val appModules = module {
     viewModel { (savedStateHandle: SavedStateHandle) ->
         GamesByGenreViewModel(
             savedStateHandle = savedStateHandle,
-            getGamesByGenreUseCase = get()
+            repository = get()
         )
     }
 }

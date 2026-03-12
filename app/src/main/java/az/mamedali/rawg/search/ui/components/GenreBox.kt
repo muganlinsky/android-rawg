@@ -19,7 +19,7 @@ import coil3.compose.AsyncImage
 fun GenreBox(
     modifier: Modifier = Modifier,
     genre: Genre,
-    onClick: (Int) -> Unit,
+    onClick: (Int, String) -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -27,7 +27,7 @@ fun GenreBox(
             .fillMaxWidth()
             .height(100.dp)
             .clickable {
-                onClick(genre.id)
+                onClick(genre.id, genre.name)
             },
         contentAlignment = Alignment.Center
     ) {
@@ -54,6 +54,6 @@ fun GenreBoxPreview() {
             imageBackground = "https://images.unsplash.com/photo-168",
             gamesCount = 10
         ),
-        onClick = {}
+        onClick = { _, _ -> }
     )
 }

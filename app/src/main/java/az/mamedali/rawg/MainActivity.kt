@@ -96,8 +96,8 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<Route.Search> {
                             SearchScreen(
-                                onGenreClick = { genreId ->
-                                    navController.navigate(Route.GamesByGenre(genreId))
+                                onGenreClick = { genreId, genreName ->
+                                    navController.navigate(Route.GamesByGenre(genreId, genreName))
                                 }
                             )
                         }

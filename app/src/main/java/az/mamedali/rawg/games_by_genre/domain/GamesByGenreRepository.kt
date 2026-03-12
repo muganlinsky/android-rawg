@@ -1,9 +1,9 @@
 package az.mamedali.rawg.games_by_genre.domain
 
-import az.mamedali.rawg.core.data.GameResponse
-import az.mamedali.rawg.core.domain.network.NetworkError
-import az.mamedali.rawg.core.domain.network.Result
+import androidx.paging.PagingData
+import az.mamedali.rawg.core.domain.Game
+import kotlinx.coroutines.flow.Flow
 
 interface GamesByGenreRepository {
-    suspend fun fetchGamesByGenre(genreId: Int): Result<GameResponse, NetworkError>
+    fun fetchGamesByGenrePaged(genreId: Int): Flow<PagingData<Game>>
 }
