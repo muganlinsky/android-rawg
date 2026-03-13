@@ -1,27 +1,21 @@
 package az.mamedali.rawg.home.ui
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +26,7 @@ import az.mamedali.rawg.core.ui.components.TextTitleMedium
 import az.mamedali.rawg.home.ui.components.GameCard
 import az.mamedali.rawg.home.ui.components.GameCardError
 import az.mamedali.rawg.home.ui.components.GameCardLoading
+import az.mamedali.rawg.home.ui.components.GameDisplayCard
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -62,7 +57,7 @@ fun HomeUi(
         CenterAlignedTopAppBar(
             title = {
                 TextHeadlineSmall(
-                    text = stringResource(R.string.home_title)
+                    text = stringResource(R.string.home_top_trending_title)
                 )
             }
         )
@@ -72,14 +67,24 @@ fun HomeUi(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            GameSection(
-                text = stringResource(R.string.home_top_trending_title)
+            val pagerState = rememberPagerState(
+                pageCount = { trendingGamesUiState.isSuccess()?.games?.size ?: 1 }
             )
-            GameLazyRow(
-                gamesUiState = trendingGamesUiState,
-                onGameClick = onGameClick
-            )
-            GameSection(
+            HorizontalPager(
+                modifier = Modifier.padding(vertical = 16.dp),
+                state = pagerState,
+                contentPadding = PaddingValues(horizontal = 48.dp),
+                pageSpacing = 8.dp
+            ) { page ->
+                GameDisplayCard(
+                    game = trendingGamesUiState.isSuccess()?.games[page],
+                    isLoading = trendingGamesUiState.isLoading,
+                    hasError = trendingGamesUiState.isError,
+                    onClick = onGameClick
+                )
+            }
+            TextTitleMedium(
+                modifier = Modifier.padding(horizontal = 16.dp),
                 text = stringResource(R.string.home_all_games_title)
             )
             GameLazyRow(
@@ -87,34 +92,6 @@ fun HomeUi(
                 onGameClick = onGameClick
             )
         }
-    }
-}
-
-@Composable
-fun GameSection(
-    modifier: Modifier = Modifier,
-    text: String
-) {
-    Row(
-        modifier = modifier
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null
-            ) {
-
-            }
-            .padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        TextTitleMedium(
-            modifier = Modifier.weight(1f),
-            text = text
-        )
-        Icon(
-            modifier = Modifier.padding(start = 8.dp),
-            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-            contentDescription = null
-        )
     }
 }
 

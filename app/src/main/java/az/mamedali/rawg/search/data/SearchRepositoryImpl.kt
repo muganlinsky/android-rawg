@@ -9,14 +9,16 @@ class SearchRepositoryImpl(
     private val localDataSource: GenresLocalDataSource
 ): SearchRepository {
     override suspend fun fetchGenres(): Result<GenreResponse, NetworkError> {
-        val localGenres = localDataSource.fetchGenres().sortedBy { it.name }
+        val localGenres = localDataSource.fetchGenres()
         if (localGenres.isNotEmpty()) {
             val genres = GenreResponse(localGenres.map { it.toGenre() })
             return Result.Success(genres)
         }
         val remoteGenres = remoteDataSource.fetchGenres()
         if (remoteGenres is Result.Success) {
-            val genres = remoteGenres.data.results.map { it.toGenreEntity() }.sortedBy { it.name }
+            val genres = remoteGenres.data.results
+                .map { it.toGenreEntity() }
+                .sortedBy { it.name }
             localDataSource.saveGenres(genres)
         }
         return remoteGenres

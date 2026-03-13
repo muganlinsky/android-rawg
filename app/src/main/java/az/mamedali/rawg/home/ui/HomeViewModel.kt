@@ -61,4 +61,10 @@ sealed class GamesUiState {
     data class Success(val games: List<Game>) : GamesUiState()
     object Loading : GamesUiState()
     object Error : GamesUiState()
+
+    fun isSuccess(): Success? = this as? Success
+    val isLoading: Boolean
+        get() = this is Loading
+    val isError: Boolean
+        get() = this is Error
 }
