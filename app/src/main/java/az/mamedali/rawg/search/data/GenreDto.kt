@@ -1,5 +1,6 @@
 package az.mamedali.rawg.search.data
 
+import az.mamedali.rawg.room.GenreEntity
 import az.mamedali.rawg.search.domain.Genre
 import kotlinx.serialization.Serializable
 
@@ -18,6 +19,15 @@ data class GenreDto(
 ) {
     fun toGenre(): Genre {
         return Genre(
+            id = id,
+            name = name,
+            imageBackground = imageBackground,
+            slug = slug,
+            gamesCount = gamesCount
+        )
+    }
+    fun toGenreEntity(): GenreEntity {
+        return GenreEntity(
             id = id,
             name = name,
             imageBackground = imageBackground,
