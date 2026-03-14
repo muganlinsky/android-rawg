@@ -16,9 +16,7 @@ class SearchRepositoryImpl(
         }
         val remoteGenres = remoteDataSource.fetchGenres()
         if (remoteGenres is Result.Success) {
-            val genres = remoteGenres.data.results
-                .map { it.toGenreEntity() }
-                .sortedBy { it.name }
+            val genres = remoteGenres.data.results.map { it.toGenreEntity() }
             localDataSource.saveGenres(genres)
         }
         return remoteGenres

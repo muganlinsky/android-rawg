@@ -7,7 +7,7 @@ class GenresLocalDataSource(
     private val dao: GenreDao
 ) {
     suspend fun fetchGenres(): List<GenreEntity> {
-        return dao.getAllGenres().sortedBy { it.name }
+        return dao.getAllGenres()
     }
 
     suspend fun saveGenres(genres: List<GenreEntity>) {

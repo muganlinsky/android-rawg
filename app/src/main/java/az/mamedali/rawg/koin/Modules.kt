@@ -69,7 +69,7 @@ val appModules = module {
         Room.databaseBuilder(
             context = androidApplication(),
             klass = AppDatabase::class.java,
-            name = "genres-db"
+            name = "rawg-db"
         )
             .build()
     }

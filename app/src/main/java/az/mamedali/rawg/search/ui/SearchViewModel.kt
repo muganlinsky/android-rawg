@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.collections.sortedBy
 
 class SearchViewModel(
     private val getGenresUseCase: GetGenresUseCase
@@ -22,7 +23,9 @@ class SearchViewModel(
                 .onSuccess { response ->
                     _uiState.update {
                         it.copy(
-                            genres = response.results.map { it.toGenre() }
+                            genres = response.results
+                                .map { it.toGenre() }
+                                .sortedBy { it.name }
                         )
                     }
                 }
