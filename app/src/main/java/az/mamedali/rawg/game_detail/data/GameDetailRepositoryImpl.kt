@@ -1,18 +1,23 @@
 package az.mamedali.rawg.game_detail.data
 
-import az.mamedali.rawg.core.domain.network.NetworkError
 import az.mamedali.rawg.core.domain.network.Result
-import az.mamedali.rawg.core.data.safeCall
+import az.mamedali.rawg.game_detail.domain.GameDetail
 import az.mamedali.rawg.game_detail.domain.GameDetailRepository
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
 
 class GameDetailRepositoryImpl(
-    private val client: HttpClient
+    private val remoteDataSource: GameRemoteDataSource,
+    private val localDataSource: GameLocalDataSource
 ): GameDetailRepository {
-    override suspend fun getGameDetail(gameId: Int): Result<GameDetailDto, NetworkError> {
-        return safeCall {
-            client.get("api/games/$gameId")
+    override suspend fun getGameDetail(gameId: Int): GameDetail? {
+        val localGame = localDataSource.fetchGame(gameId)
+        if (localGame != null) {
+            return localGame.toGameDetail()
         }
+        val response = remoteDataSource.fetchGameDetail(gameId)
+        if (response is Result.Success) {
+            localDataSource.saveGame(response.data.toGameDetailEntity())
+            return response.data.toGameDetail()
+        }
+        return null
     }
 }

@@ -1,6 +1,6 @@
 package az.mamedali.rawg.search.data
 
-import az.mamedali.rawg.room.GenreEntity
+import az.mamedali.rawg.room.entities.GenreEntity
 import az.mamedali.rawg.search.domain.Genre
 import kotlinx.serialization.Serializable
 

@@ -16,6 +16,8 @@ import az.mamedali.rawg.search.domain.GetGenresUseCase
 import az.mamedali.rawg.search.domain.SearchRepository
 import az.mamedali.rawg.search.ui.SearchViewModel
 import az.mamedali.rawg.BuildConfig
+import az.mamedali.rawg.game_detail.data.GameLocalDataSource
+import az.mamedali.rawg.game_detail.data.GameRemoteDataSource
 import az.mamedali.rawg.games_by_genre.data.GamesByGenreRepositoryImpl
 import az.mamedali.rawg.games_by_genre.domain.GamesByGenreRepository
 import az.mamedali.rawg.games_by_genre.ui.GamesByGenreViewModel
@@ -76,9 +78,14 @@ val appModules = module {
     single {
         get<AppDatabase>().genresDao()
     }
+    single {
+        get<AppDatabase>().gamesDao()
+    }
 
     singleOf(::GenresLocalDataSource)
     singleOf(::GenresRemoteDataSource)
+    singleOf(::GameLocalDataSource)
+    singleOf(::GameRemoteDataSource)
 
     singleOf(::HomeRepositoryImpl) {
         bind<HomeRepository>()

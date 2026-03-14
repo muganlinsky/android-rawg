@@ -1,6 +1,7 @@
 package az.mamedali.rawg.game_detail.data
 
 import az.mamedali.rawg.game_detail.domain.GameDetail
+import az.mamedali.rawg.room.entities.GameEntity
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -34,6 +35,26 @@ data class GameDetailDto(
             playtime = playtime,
             platforms = platforms.map { it.platform.name },
             esrb = esrbRating?.name
+        )
+    }
+
+    fun toGameDetailEntity(): GameEntity {
+        return GameEntity(
+            id = id,
+            name = name,
+            description = descriptionRaw,
+            released = released,
+            backgroundImage = backgroundImage,
+            rating = rating,
+            metacritic = metacritic,
+            playtime = playtime,
+            platforms = platforms.map { it.platform.name },
+            esrb = esrbRating?.name,
+            slug = slug,
+            website = website,
+            screenshotsCount = screenshotsCount,
+            ratingCount = ratingsCount,
+            ratingTop = ratingTop
         )
     }
 }

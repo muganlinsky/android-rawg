@@ -7,9 +7,11 @@ class GetGameDetailUseCase(
     private val repository: GameDetailRepository
 ) {
     suspend operator fun invoke(gameId: Int): Result<GameDetail, NetworkError> {
-        return when (val result = repository.getGameDetail(gameId)) {
-            is Result.Success -> Result.Success(result.data.toGameDetail())
-            is Result.Error -> Result.Error(result.error)
+        val result = repository.getGameDetail(gameId)
+        return if (result != null) {
+            Result.Success(result)
+        } else {
+            Result.Error(NetworkError.UNKNOWN)
         }
     }
 }

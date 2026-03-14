@@ -1,4 +1,4 @@
-package az.mamedali.rawg.room
+package az.mamedali.rawg.room.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

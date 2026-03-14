@@ -1,7 +1,7 @@
 package az.mamedali.rawg.search.data
 
-import az.mamedali.rawg.room.GenreDao
-import az.mamedali.rawg.room.GenreEntity
+import az.mamedali.rawg.room.dao.GenreDao
+import az.mamedali.rawg.room.entities.GenreEntity
 
 class GenresLocalDataSource(
     private val dao: GenreDao
