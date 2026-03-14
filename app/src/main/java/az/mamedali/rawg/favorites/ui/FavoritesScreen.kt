@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import az.mamedali.rawg.R
 import az.mamedali.rawg.core.ui.components.TextHeadlineSmall
+import az.mamedali.rawg.core.ui.components.TextTitleLarge
 
 @Composable
 fun FavoritesScreen() {
@@ -25,7 +26,7 @@ fun FavoritesUi(
     ) {
         CenterAlignedTopAppBar(
             title = {
-                TextHeadlineSmall(
+                TextTitleLarge(
                     text = stringResource(R.string.favorites_title)
                 )
             }

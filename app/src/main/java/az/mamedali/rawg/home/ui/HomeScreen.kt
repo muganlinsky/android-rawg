@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,7 +22,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import az.mamedali.rawg.R
+import az.mamedali.rawg.core.ui.components.TextBodyLarge
+import az.mamedali.rawg.core.ui.components.TextBodyMedium
+import az.mamedali.rawg.core.ui.components.TextHeadlineMedium
 import az.mamedali.rawg.core.ui.components.TextHeadlineSmall
+import az.mamedali.rawg.core.ui.components.TextLabelLarge
+import az.mamedali.rawg.core.ui.components.TextLabelMedium
+import az.mamedali.rawg.core.ui.components.TextTitleLarge
 import az.mamedali.rawg.core.ui.components.TextTitleMedium
 import az.mamedali.rawg.home.ui.components.GameCard
 import az.mamedali.rawg.home.ui.components.GameCardError
@@ -56,7 +63,7 @@ fun HomeUi(
     ) {
         CenterAlignedTopAppBar(
             title = {
-                TextHeadlineSmall(
+                TextTitleLarge(
                     text = stringResource(R.string.home_top_trending_title)
                 )
             }
@@ -68,13 +75,13 @@ fun HomeUi(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             val pagerState = rememberPagerState(
-                pageCount = { trendingGamesUiState.isSuccess()?.games?.size ?: 1 }
+                pageCount = { trendingGamesUiState.isSuccess()?.games?.size ?: 2 }
             )
             HorizontalPager(
                 modifier = Modifier.padding(vertical = 16.dp),
                 state = pagerState,
                 contentPadding = PaddingValues(horizontal = 48.dp),
-                pageSpacing = 8.dp
+                pageSpacing = 16.dp
             ) { page ->
                 GameDisplayCard(
                     game = trendingGamesUiState.isSuccess()?.games[page],
@@ -123,7 +130,7 @@ fun GameLazyRow(
             }
 
             is GamesUiState.Loading -> {
-                items(5) {
+                items(3) {
                     GameCardLoading()
                 }
             }

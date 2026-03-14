@@ -18,6 +18,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import az.mamedali.rawg.core.domain.Game
 import az.mamedali.rawg.core.ui.components.TextHeadlineSmall
+import az.mamedali.rawg.core.ui.components.TextTitleLarge
 import az.mamedali.rawg.games_by_genre.ui.components.GameRow
 import org.koin.androidx.compose.koinViewModel
 
@@ -49,7 +50,7 @@ fun GamesByGenreUi(
     ) {
         CenterAlignedTopAppBar(
             title = {
-                TextHeadlineSmall(
+                TextTitleLarge(
                     text = genreName
                 )
             },

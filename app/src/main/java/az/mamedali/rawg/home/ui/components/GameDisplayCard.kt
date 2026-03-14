@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,16 +45,14 @@ fun GameDisplayCard(
     ) {
         Column(
             modifier = Modifier
-                .width(250.dp)
-                .height(400.dp)
+                .fillMaxWidth()
+                .height(350.dp)
                 .clickable { game?.let { onClick(it.id) } }
         ) {
             when {
                 isLoading -> {
                     Box(
-                        modifier = Modifier
-                            .size(250.dp)
-                            .background(MaterialTheme.colorScheme.surfaceVariant),
+                        modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
                         CircularProgressIndicator()
@@ -61,15 +60,12 @@ fun GameDisplayCard(
                 }
                 hasError -> {
                     Box(
-                        modifier = Modifier
-                            .size(250.dp)
-                            .background(MaterialTheme.colorScheme.surfaceVariant),
+                        modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             imageVector = Icons.Default.BrokenImage,
-                            contentDescription = "Image failed",
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                            contentDescription = "Image failed"
                         )
                     }
                 }
@@ -77,7 +73,7 @@ fun GameDisplayCard(
                     AsyncImage(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(250.dp),
+                            .height(225.dp),
                         model = game?.imageUrl,
                         contentDescription = null,
                         contentScale = ContentScale.Crop

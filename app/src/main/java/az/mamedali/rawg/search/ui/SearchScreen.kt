@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import az.mamedali.rawg.R
 import az.mamedali.rawg.core.ui.components.TextHeadlineSmall
+import az.mamedali.rawg.core.ui.components.TextTitleLarge
 import az.mamedali.rawg.search.domain.Genre
 import az.mamedali.rawg.search.ui.components.GenreBox
 import org.koin.compose.viewmodel.koinViewModel
@@ -42,7 +43,7 @@ fun SearchUi(
     ) {
         CenterAlignedTopAppBar(
             title = {
-                TextHeadlineSmall(
+                TextTitleLarge(
                     text = stringResource(R.string.search_title)
                 )
             }

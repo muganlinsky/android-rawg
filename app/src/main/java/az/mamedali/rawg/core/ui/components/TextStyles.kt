@@ -47,6 +47,18 @@ fun TextTitleSmall(
 }
 
 @Composable
+fun TextLabelLarge(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier,
+        style = MaterialTheme.typography.labelLarge,
+        text = text
+    )
+}
+
+@Composable
 fun TextLabelMedium(
     modifier: Modifier = Modifier,
     text: String
@@ -54,6 +66,30 @@ fun TextLabelMedium(
     Text(
         modifier = modifier,
         style = MaterialTheme.typography.labelMedium,
+        text = text
+    )
+}
+
+@Composable
+fun TextLabelSmall(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier,
+        style = MaterialTheme.typography.labelSmall,
+        text = text
+    )
+}
+
+@Composable
+fun TextHeadlineMedium(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier,
+        style = MaterialTheme.typography.headlineMedium,
         text = text
     )
 }
@@ -71,6 +107,18 @@ fun TextHeadlineSmall(
 }
 
 @Composable
+fun TextBodySmall(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier,
+        style = MaterialTheme.typography.bodySmall,
+        text = text
+    )
+}
+
+@Composable
 fun TextBodyMedium(
     modifier: Modifier = Modifier,
     text: String
@@ -78,6 +126,18 @@ fun TextBodyMedium(
     Text(
         modifier = modifier,
         style = MaterialTheme.typography.bodyMedium,
+        text = text
+    )
+}
+
+@Composable
+fun TextBodyLarge(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier,
+        style = MaterialTheme.typography.bodyLarge,
         text = text
     )
 }
